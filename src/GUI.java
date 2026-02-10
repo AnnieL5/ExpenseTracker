@@ -1,24 +1,27 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class GUI extends JPanel{
-    GridLayout layout;
+public class GUI extends JPanel {
+    GridBagLayout layout;
 
     JLabel textLabel;
     JButton addButton;
-    public GUI(){
-        layout = new GridLayout();
+    GridBagConstraints gbc;
+
+    public GUI() {
+        layout = new GridBagLayout();
         this.setLayout(layout);
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        gbc = new GridBagConstraints();
 
         textLabel = new JLabel("Hello!");
         addButton = new JButton("add");
 
-        addobjects(textLabel, addButton, null, gbc, ALLBITS, ABORT, WIDTH, HEIGHT);
+        addobjects(textLabel, layout, gbc, 0, 0, 1, 1);
     }
 
-    public void addobjects(Component componente, Container yourcontainer, GridBagLayout layout, GridBagConstraints gbc, int gridx, int gridy, int igridwidth, int igridheigth){
+    public void addobjects(Component componente, GridBagLayout layout, GridBagConstraints gbc, int gridx, int gridy,
+            int igridwidth, int igridheigth) {
 
         gbc.gridx = gridx;
         gbc.gridy = gridy;
@@ -27,6 +30,6 @@ public class GUI extends JPanel{
         gbc.gridheight = igridheigth;
 
         layout.setConstraints(componente, gbc);
-        yourcontainer.add(componente);
+        this.add(componente);
     }
 }
