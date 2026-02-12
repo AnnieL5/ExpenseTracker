@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 public class addGUI extends JFrame implements ItemListener, ActionListener{
     final static String EXPENSE = "Add Expense";
@@ -10,6 +11,9 @@ public class addGUI extends JFrame implements ItemListener, ActionListener{
     JPanel cards;
     JPanel card1;
     JPanel card2;
+    JTextField amountField;
+    JTextField dateField;
+    JTextField noteField;
     JPanel comboBoxPane;
     JComboBox cb;
 
@@ -24,12 +28,23 @@ public class addGUI extends JFrame implements ItemListener, ActionListener{
         comboBoxPane.add(cb);
 
         //Create cards
-        card1 = new JPanel(); //expense
-        card1.add(new JTextField("Amount: ", 20));
-        card1.add(new JTextField("Date: ", 20));
-        card1.add(new JTextField("Note: ", 20));
+        card1 = new JPanel(); //expense new GridLayout(4, 2)
+        amountField = new JTextField(20);
+        dateField = new JTextField(22);
+        noteField = new JTextField(20);
+
+        card1.add(new JLabel("Amount:"));
+        card1.add(amountField);
+
+        card1.add(new JLabel("Date:"));
+        card1.add(dateField);
+
+        card1.add(new JLabel("Note:"));
+        card1.add(noteField);
+
 
         submitButton = new JButton("Add");
+        submitButton.addActionListener(this);
         card1.add(submitButton);
         
         // card2 = new JPanel();
@@ -64,5 +79,16 @@ public class addGUI extends JFrame implements ItemListener, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         this.setVisible(false);
+    }
+    
+    private void clearTextFocus(JTextComponent field) {
+        FocusAdapter adapter = new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                field.setText("");
+                field.removeFocusListener(this);
+            }
+        };
+        field.addFocusListener(adapter);
     }
 }
