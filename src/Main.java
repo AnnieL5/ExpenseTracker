@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Main {
     public static topGUI topgui;
     public static centerGUI centergui;
-    public static createDB createdb;
+    public static rightGUI rightgui;
 
     public static void main(String[] args) throws Exception {
         // Creating instance of JFrame
@@ -16,19 +16,21 @@ public class Main {
 
         topgui = new topGUI();
         centergui = new centerGUI();
+        rightgui = new rightGUI();
 
         // adding button in JFrame
         frame.add(topgui, BorderLayout.PAGE_START);
         frame.add(centergui, BorderLayout.CENTER);
+        frame.add(rightgui, BorderLayout.EAST);
 
         // 400 width and 500 height
-        frame.setSize(500, 600);
+        frame.setSize(700, 600);
 
-        createdb = new createDB();
-        createdb.createDatabase();
-        createdb.createTable();
-        createdb.insertTransaction(0, "2026-01-12", "NA");
-        createdb.retrieveTransactions();
+        // createdb = new createDB();
+        createDB.createDatabase();
+        createDB.createTable();
+        // createDB.insertTransaction(0, "2026-01-12", "NA");
+        createDB.retrieveTransactions();
 
         /* GridBag layout */
 

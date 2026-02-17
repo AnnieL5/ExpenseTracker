@@ -34,15 +34,15 @@ public class createDB {
     // }
     // }
 
-    private final String url = "jdbc:mysql://localhost:3306/expenseTracker";
-    private final String userName = "root";
-    private final String password = "PASSWORD";
+    private static final String url = "jdbc:mysql://localhost:3306/expenseTracker";
+    private static final String userName = "root";
+    private static final String password = "SQL.mtbt0511";
 
-    private Connection getConnection() throws SQLException {
+    private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, userName, password);
     }
 
-    public void createDatabase() {
+    public static void createDatabase() {
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/", userName, password);
                 Statement stmt = conn.createStatement()) {
@@ -60,10 +60,11 @@ public class createDB {
         }
     }
 
-    public void createTable() {
+    public static void createTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS transactions (
                     id INT AUTO_INCREMENT PRIMARY KEY,
+                    type ENUM('INCOME', 'EXPENSE') NOT NULL,
                     amount DECIMAL(10,2) NOT NULL,
                     date DATE NOT NULL,
                     description VARCHAR(255)
@@ -85,16 +86,17 @@ public class createDB {
         }
     }
 
-    public void insertTransaction(double amount, String date, String note) {
+    public static void insertTransaction(String type, float amount, String date, String note) {
 
-        String sql = "INSERT INTO transactions (amount, date, description) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO transactions (type, amount, date, description) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setDouble(1, amount);
-            pstmt.setString(2, date);
-            pstmt.setString(3, note);
+            pstmt.setString(1, type);
+            pstmt.setDouble(2, amount);
+            pstmt.setString(3, date);
+            pstmt.setString(4, note);
 
             pstmt.executeUpdate();
 
@@ -108,9 +110,10 @@ public class createDB {
         }
     }
 
-    public void retrieveTransactions() {
+    public static String retrieveTransactions() {
 
         String sql = "SELECT * FROM transactions";
+        String output = "";
 
         try (Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
@@ -118,15 +121,46 @@ public class createDB {
 
             while (result.next()) {
                 int id = result.getInt("id");
+                String type = result.getString("type");
                 double amount = result.getDouble("amount");
                 Date date = result.getDate("date");
                 String desc = result.getString("description");
 
-                System.out.println(id + " | " + amount + " | " + date + " | " + desc);
+                output += "ID: " + id + " | Type: " + type + " | Amount: " + amount + " | Date: " + date
+                        + " | Description: " + desc
+                        + "\n\n";
+                // System.out.println(id + " | " + amount + " | " + date + " | " + desc);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return output;
     }
+
+    public static void resetDB() {
+
+        String sql = "TRUNCATE TABLE transactions";
+
+        try (Connection conn = getConnection();
+                Statement stmt = conn.createStatement()) {
+
+            stmt.executeUpdate(sql);
+
+            JOptionPane.showMessageDialog(null,
+                    "Table cleared successfully",
+                    "System Message",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * Delete: TRUNCATE TABLE table_name;
+     * DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+     */
+
 }
