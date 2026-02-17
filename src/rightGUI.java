@@ -10,6 +10,7 @@ public class rightGUI extends JPanel implements ActionListener {
     deleteGUI deletegui;
 
     public rightGUI() {
+        setLayout(new GridLayout(2,1));
         deletegui = new deleteGUI();
 
         resetDBbutton = new JButton("Reset Database");

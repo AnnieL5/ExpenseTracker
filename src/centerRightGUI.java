@@ -14,7 +14,7 @@ public class centerRightGUI extends JPanel {
         historyText.setEditable(false);
 
         JScrollPane scrollPane = new JScrollPane(historyText);
-        scrollPane.setPreferredSize(new Dimension(400, 500));
+        scrollPane.setPreferredSize(new Dimension(500, 550));
 
         this.add(historyLabel);
         this.add(scrollPane);

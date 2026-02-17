@@ -3,13 +3,23 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Main {
+    public static introGUI introgui;
     public static topGUI topgui;
     public static centerGUI centergui;
     public static rightGUI rightgui;
 
+    public static JFrame frame;
+
     public static void main(String[] args) throws Exception {
+        introgui = new introGUI();
+        String pasw = createDB.getPassword();
+        while(pasw.equals("")){
+            System.out.println("psw:"+pasw);
+            pasw = createDB.getPassword();
+        }
+
         // Creating instance of JFrame
-        JFrame frame = new JFrame();
+        frame = new JFrame();
 
         // using no layout managers
         frame.setLayout(new BorderLayout());
@@ -22,6 +32,10 @@ public class Main {
         frame.add(topgui, BorderLayout.PAGE_START);
         frame.add(centergui, BorderLayout.CENTER);
         frame.add(rightgui, BorderLayout.EAST);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.setVisible(true);
 
         // 400 width and 500 height
         frame.setSize(700, 600);
@@ -42,8 +56,6 @@ public class Main {
         // frame.setSize(700, 500); // Set an appropriate size for the frame
 
         // Setting the default close operation
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        frame.setVisible(true);
+        
     }
 }

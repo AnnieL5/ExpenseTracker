@@ -32,5 +32,6 @@ public class deleteGUI extends JFrame implements ActionListener{
         int id = Integer.parseInt(componentID.getText());
         createDB.deleteTransaction(id);
         centerRightGUI.updateHistory();
+        setVisible(false);
     }
 }

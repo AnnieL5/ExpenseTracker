@@ -36,7 +36,15 @@ public class createDB {
 
     private static final String url = "jdbc:mysql://localhost:3306/expenseTracker";
     private static final String userName = "root";
-    private static final String password = "";
+    private static String password = "";
+
+    public static void setPassword(String psw){
+        password = psw;
+    }
+
+    public static String getPassword(){
+        return password;
+    }
 
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, userName, password);
