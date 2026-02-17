@@ -96,6 +96,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
                 type = "INCOME";
             }
 
+            topGUI.updateInfoText(amount);
             createDB.insertTransaction(type, amount, date, note);
 
             centerRightGUI.updateHistory();

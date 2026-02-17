@@ -139,6 +139,28 @@ public class createDB {
         return output;
     }
 
+    public static float retrieveNetMoney() {
+
+        String sql = "SELECT amount FROM transactions";
+        float sum = 0;
+        double amount;
+
+        try (Connection conn = getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet result = stmt.executeQuery(sql)) {
+
+            while (result.next()) {
+                amount = result.getDouble("amount");
+                sum += amount;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sum;
+    }
+
     public static void resetDB() {
 
         String sql = "TRUNCATE TABLE transactions";

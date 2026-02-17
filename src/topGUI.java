@@ -2,18 +2,20 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class topGUI extends JPanel implements ActionListener{
+public class topGUI extends JPanel implements ActionListener {
     private JButton addButton;
     static JLabel infoText;
     private addGUI addgui;
 
-    public topGUI(){
-        setBounds(0,0,400,400);
+    private static float netMoney;
+
+    public topGUI() {
+        setBounds(0, 0, 400, 400);
         setLayout(new FlowLayout());
 
-        addButton = new JButton("Add");
+        addButton = new JButton("Add transaction");
         infoText = new JLabel();
-        updateInfoText();
+        initNetMoney();
 
         addgui = new addGUI();
 
@@ -24,12 +26,18 @@ public class topGUI extends JPanel implements ActionListener{
 
     }
 
-    public static void updateInfoText(){
-        infoText.setText("You lost money!");
+    public void initNetMoney() {
+        netMoney = createDB.retrieveNetMoney();
+        infoText.setText("Current hold: " + netMoney);
+    }
+
+    public static void updateInfoText(float amount) {
+        netMoney += amount;
+        infoText.setText("Current hold: " + netMoney);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         addgui.setVisible(true);
     }
 }
