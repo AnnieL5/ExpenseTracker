@@ -28,14 +28,18 @@ public class topGUI extends JPanel implements ActionListener {
 
     public void initNetMoney() {
         netMoney = createDB.retrieveNetMoney();
-        infoText.setText("Current hold: " + netMoney);
+        infoText.setText("Current Balance: " + netMoney);
     }
 
     public static void updateInfoText(float amount) {
         netMoney += amount;
-        infoText.setText("Current hold: " + netMoney);
+        infoText.setText("Current Balance: " + netMoney);
     }
 
+    public static void resetInfoText(){
+        netMoney = createDB.retrieveNetMoney();
+        infoText.setText("Current Balance: " + netMoney);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         addgui.setVisible(true);

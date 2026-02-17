@@ -34,7 +34,10 @@ public class introGUI extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        createDB.setPassword(password.getText());
+        // createDB.setPassword("SQL.mtbt0511");
+        String str = String.valueOf(password.getPassword());
+        System.out.println(str);
+        createDB.setPassword(str);
         setVisible(false);
     }
 }

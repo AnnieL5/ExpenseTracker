@@ -14,7 +14,7 @@ public class Main {
         introgui = new introGUI();
         String pasw = createDB.getPassword();
         while(pasw.equals("")){
-            System.out.println("psw:"+pasw);
+            System.out.println("PSW: "+pasw);
             pasw = createDB.getPassword();
         }
 

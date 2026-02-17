@@ -28,6 +28,7 @@ public class rightGUI extends JPanel implements ActionListener {
             createDB.resetDB();
             createDB.createTable();
             centerRightGUI.updateHistory();
+            topGUI.resetInfoText();
         } else if (e.getSource() == deleteDBbutton){
             deletegui.setVisible(true);
         }

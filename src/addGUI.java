@@ -103,6 +103,11 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
 
             JOptionPane.showMessageDialog(null, "Transaction added successfully!");
             this.setVisible(false);
+
+            amountField.setText("");
+            dateField.setText("");
+            noteField.setText("");
+
         }
     }
 
