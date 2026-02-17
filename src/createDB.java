@@ -36,7 +36,7 @@ public class createDB {
 
     private static final String url = "jdbc:mysql://localhost:3306/expenseTracker";
     private static final String userName = "root";
-    private static final String password = "SQL.mtbt0511";
+    private static final String password = "";
 
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, userName, password);
@@ -172,6 +172,24 @@ public class createDB {
 
             JOptionPane.showMessageDialog(null,
                     "Table cleared successfully",
+                    "System Message",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteTransaction(int id){
+        String sql = "DELETE FROM transactions WHERE id=" + id + ";";
+
+        try (Connection conn = getConnection();
+                Statement stmt = conn.createStatement()) {
+
+            stmt.executeUpdate(sql);
+
+            JOptionPane.showMessageDialog(null,
+                    "Transaction deleted successfully",
                     "System Message",
                     JOptionPane.INFORMATION_MESSAGE);
 

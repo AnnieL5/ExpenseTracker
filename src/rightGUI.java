@@ -5,11 +5,20 @@ import javax.swing.*;
 
 public class rightGUI extends JPanel implements ActionListener {
     JButton resetDBbutton;
+    JButton deleteDBbutton;
+
+    deleteGUI deletegui;
 
     public rightGUI() {
+        deletegui = new deleteGUI();
+
         resetDBbutton = new JButton("Reset Database");
         resetDBbutton.addActionListener(this);
         this.add(resetDBbutton);
+
+        deleteDBbutton = new JButton("Delete transaction");
+        deleteDBbutton.addActionListener(this);
+        this.add(deleteDBbutton);
     }
 
     @Override
@@ -18,6 +27,8 @@ public class rightGUI extends JPanel implements ActionListener {
             createDB.resetDB();
             createDB.createTable();
             centerRightGUI.updateHistory();
+        } else if (e.getSource() == deleteDBbutton){
+            deletegui.setVisible(true);
         }
     }
 }
