@@ -29,11 +29,23 @@ public class topGUI extends JPanel implements ActionListener {
     public void initNetMoney() {
         netMoney = createDB.retrieveNetMoney();
         infoText.setText("Current Balance: " + netMoney);
+        if (netMoney < 0){
+            JOptionPane.showMessageDialog(null,
+                    "WARNING: Negative Balance",
+                    "System Message",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public static void updateInfoText(float amount) {
         netMoney += amount;
         infoText.setText("Current Balance: " + netMoney);
+        if (netMoney < 0){
+            JOptionPane.showMessageDialog(null,
+                    "WARNING: Negative Balance",
+                    "System Message",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public static void resetInfoText(){

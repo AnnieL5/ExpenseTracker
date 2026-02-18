@@ -25,10 +25,20 @@ public class rightGUI extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resetDBbutton) {
-            createDB.resetDB();
-            createDB.createTable();
-            centerRightGUI.updateHistory();
-            topGUI.resetInfoText();
+            int response = JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to reset the database?",
+            "Confirm Reset",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+            );
+
+            if (response == JOptionPane.YES_OPTION){
+                createDB.resetDB();
+                createDB.createTable();
+                centerRightGUI.updateHistory();
+                topGUI.resetInfoText();
+            }
         } else if (e.getSource() == deleteDBbutton){
             deletegui.setVisible(true);
         }
