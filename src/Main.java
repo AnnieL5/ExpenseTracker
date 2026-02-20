@@ -1,6 +1,8 @@
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.OceanTheme;
 
 public class Main {
     public static introGUI introgui;
@@ -11,6 +13,15 @@ public class Main {
     public static JFrame frame;
 
     public static void main(String[] args) throws Exception {
+        // try {
+        //     // Set the Look and Feel to the system's native L&F
+        //     UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        //     // MetalLookAndFeel.setCurrentTheme(new OceanTheme());
+        // } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        //     // Handle exceptions (e.g., if the desired L&F is not available)
+        //     e.printStackTrace();
+        // }
+
         introgui = new introGUI();
         String pasw = createDB.getPassword();
         while(pasw.equals("")){
@@ -20,6 +31,7 @@ public class Main {
 
         // Creating instance of JFrame
         frame = new JFrame();
+        frame.setBackground(new Color(255, 100, 50));
 
         // using no layout managers
         frame.setLayout(new BorderLayout());
