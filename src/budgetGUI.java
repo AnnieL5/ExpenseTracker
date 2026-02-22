@@ -14,6 +14,8 @@ public class budgetGUI extends JFrame implements ActionListener {
     private JSlider saveSlider;
 
     private JTextField needTF;
+    private JTextField wantTF;
+    private JTextField saveTF;
 
     public budgetGUI() {
         this.setLayout(new java.awt.FlowLayout());
@@ -30,15 +32,32 @@ public class budgetGUI extends JFrame implements ActionListener {
         description.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(description);
 
+        // Need
         this.add(new JLabel("Need (%): "));
         needSlider = new JSlider(0, 100);
-        needSlider.setPaintLabels(true);
-        needSlider.setMajorTickSpacing(10);
+        needTF = new JTextField(String.valueOf(needSlider.getValue()), 15);
+        setupSlider(needSlider, needTF);
 
-        needTF = new JTextField(String.valueOf(needSlider.getValue()), 5);
-        needTF.addActionListener(this);
+        this.add(needSlider);
+        this.add(needTF);
 
-        needSlider.addChangeListener(e -> needTF.setText(String.valueOf(needSlider.getValue())));
+        // Want
+        this.add(new JLabel("Want (%): "));
+        wantSlider = new JSlider(0, 100);
+        wantTF = new JTextField(String.valueOf(wantSlider.getValue()), 15);
+        setupSlider(wantSlider, wantTF);
+
+        this.add(wantSlider);
+        this.add(wantTF);
+
+        // Savings
+        this.add(new JLabel("Saving (%): "));
+        saveSlider = new JSlider(0, 100);
+        saveTF = new JTextField(String.valueOf(saveSlider.getValue()), 15);
+        setupSlider(saveSlider, saveTF);
+
+        this.add(saveSlider);
+        this.add(saveTF);
 
         // needTF.addActionListener(e -> {
         // try {
@@ -54,12 +73,6 @@ public class budgetGUI extends JFrame implements ActionListener {
         // needTF.setText(String.valueOf(needSlider.getValue()));
         // }
         // });
-
-        this.add(needSlider);
-        this.add(needTF);
-
-        this.add(new JLabel("Want (%): "));
-        this.add(new JLabel("Save (%): "));
 
     }
 
@@ -83,5 +96,14 @@ public class budgetGUI extends JFrame implements ActionListener {
             // Reset if invalid input
             textfield.setText(String.valueOf(slider.getValue()));
         }
+    }
+
+    public void setupSlider(JSlider slider, JTextField textField) {
+        slider.setPaintLabels(true);
+        slider.setMajorTickSpacing(10);
+
+        textField.addActionListener(this);
+
+        slider.addChangeListener(e -> textField.setText(String.valueOf(slider.getValue())));
     }
 }
