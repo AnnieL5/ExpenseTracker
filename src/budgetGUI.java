@@ -13,30 +13,41 @@ public class budgetGUI extends JFrame implements ActionListener {
     private JSlider wantSlider;
     private JSlider saveSlider;
 
+    private JTextField budgetTF;
+
     private JTextField needTF;
     private JTextField wantTF;
     private JTextField saveTF;
 
+    private JButton submitButton;
+
     public budgetGUI() {
         this.setLayout(new java.awt.FlowLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-        this.setSize(500, 400);
 
         heading = new JLabel("Enter your budget");
         heading.setFont(new Font("Arial", Font.BOLD, 16));
         this.add(heading);
 
         description = new JLabel(
-                "<html>Please enter your budget for the month.<br> The amount entered will be split into sections (needs, wants, save) based on your preference.</html>");
+                "<html>Please enter your budget for the month.<br> The amount entered will be split into sections (needs, <br> wants, save) based on your preference.</html>");
         description.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(description);
+
+        // this.add(new JLabel("<html> <br> </html>"));
+
+        this.add(new JLabel("Budget ($): "));
+        budgetTF = new JTextField(30);
+        budgetTF.addActionListener(this);
+        this.add(budgetTF);
+
+        // this.add(new JLabel("\n"));
 
         // Need
         this.add(new JLabel("Need (%): "));
         needSlider = new JSlider(0, 100);
         needTF = new JTextField(String.valueOf(needSlider.getValue()), 15);
         setupSlider(needSlider, needTF);
+        System.out.println("Here");
 
         this.add(needSlider);
         this.add(needTF);
@@ -59,6 +70,16 @@ public class budgetGUI extends JFrame implements ActionListener {
         this.add(saveSlider);
         this.add(saveTF);
 
+        // this.add(new JLabel("\n"));
+
+        submitButton = new JButton("Done");
+        submitButton.addActionListener(this);
+        this.add(submitButton);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+        this.setSize(450, 450);
+
         // needTF.addActionListener(e -> {
         // try {
         // int value = Integer.parseInt(needTF.getText());
@@ -80,6 +101,20 @@ public class budgetGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == needTF) {
             textFieldAction(needSlider, needTF);
+        } else if (e.getSource() == wantTF) {
+            textFieldAction(wantSlider, wantTF);
+        } else if (e.getSource() == saveTF) {
+            textFieldAction(saveSlider, saveTF);
+        } else if (e.getSource() == submitButton) {
+            int needP = Integer.parseInt(needTF.getText());
+            int wantP = Integer.parseInt(wantTF.getText());
+            int saveP = Integer.parseInt(saveTF.getText());
+
+            int budget = Math.round(Float.parseFloat(budgetTF.getText()));
+
+            topGUI.needBudget = Math.round(budget * needP / 100);
+            topGUI.wantBudget = Math.round(budget * wantP / 100);
+            topGUI.saveBudget = Math.round(budget * saveP / 100);
         }
     }
 

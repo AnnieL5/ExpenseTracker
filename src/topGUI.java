@@ -7,7 +7,14 @@ public class topGUI extends JPanel implements ActionListener {
     static JLabel infoText;
     private addGUI addgui;
 
+    static int needBudget;
+    static int wantBudget;
+    static int saveBudget;
+
     private static float netMoney;
+    private static float netNeed;
+    private static float netWant;
+    private static float netSave;
 
     public topGUI() {
         setBounds(0, 0, 400, 400);
@@ -30,10 +37,10 @@ public class topGUI extends JPanel implements ActionListener {
         netMoney = createDB.retrieveNetMoney();
         infoText.setText("Current Balance: " + netMoney);
         // if (netMoney < 0){
-        //     JOptionPane.showMessageDialog(null,
-        //             "WARNING: Negative Balance",
-        //             "System Message",
-        //             JOptionPane.WARNING_MESSAGE);
+        // JOptionPane.showMessageDialog(null,
+        // "WARNING: Negative Balance",
+        // "System Message",
+        // JOptionPane.WARNING_MESSAGE);
         // }
     }
 
@@ -41,17 +48,18 @@ public class topGUI extends JPanel implements ActionListener {
         netMoney += amount;
         infoText.setText("Current Balance: " + netMoney);
         // if (netMoney < 0){
-        //     JOptionPane.showMessageDialog(null,
-        //             "WARNING: Negative Balance",
-        //             "System Message",
-        //             JOptionPane.WARNING_MESSAGE);
+        // JOptionPane.showMessageDialog(null,
+        // "WARNING: Negative Balance",
+        // "System Message",
+        // JOptionPane.WARNING_MESSAGE);
         // }
     }
 
-    public static void resetInfoText(){
+    public static void resetInfoText() {
         netMoney = createDB.retrieveNetMoney();
         infoText.setText("Current Balance: " + netMoney);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         addgui.setVisible(true);
