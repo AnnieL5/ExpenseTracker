@@ -9,6 +9,10 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
     final static String EXPENSE = "Add Expense";
     final static String INCOME = "Add income";
 
+    final static String NEED = "  Need                          ";
+    final static String WANT = "  Want                          ";
+    final static String SAVING = "  Saving                          ";
+
     JPanel cards;
     JPanel card1;
     JPanel card2;
@@ -17,6 +21,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
     JTextField noteField;
     JPanel comboBoxPane;
     JComboBox cb;
+    JComboBox typecb;
 
     JButton submitButton;
 
@@ -31,8 +36,8 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
         // Create cards
         card1 = new JPanel(); // expense new GridLayout(4, 2)
         amountField = new JTextField(20);
-        dateField = new JTextField(15);
-        noteField = new JTextField(20);
+        dateField = new JTextField(13);
+        noteField = new JTextField(18);
 
         card1.add(new JLabel("Amount"));
 
@@ -40,6 +45,13 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
 
         card1.add(new JLabel("Date(YYYY-MM-DD):"));
         card1.add(dateField);
+
+        card1.add(new JLabel("   Type:     "));
+        String typeCBItems[] = { NEED, WANT, SAVING };
+        typecb = new JComboBox(typeCBItems);
+        typecb.setEditable(false);
+        typecb.addItemListener(this);
+        card1.add(typecb);
 
         card1.add(new JLabel("Note:"));
         card1.add(noteField);
@@ -57,7 +69,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
         cards.add(card1);
         // cards.add(card2, INCOME);
 
-        this.setSize(300, 400);
+        this.setSize(250, 220);
 
         this.add(comboBoxPane, BorderLayout.PAGE_START);
         this.add(cards, BorderLayout.CENTER);
@@ -96,8 +108,10 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
                 type = "INCOME";
             }
 
+            String type2 = cb.getSelectedItem().toString();
+
             topGUI.updateInfoText(amount);
-            createDB.insertTransaction(type, amount, date, note);
+            createDB.insertTransaction(type, amount, date, type2, note);
 
             centerRightGUI.updateHistory();
 

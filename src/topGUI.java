@@ -35,7 +35,11 @@ public class topGUI extends JPanel implements ActionListener {
 
     public void initNetMoney() {
         netMoney = createDB.retrieveNetMoney();
-        infoText.setText("Current Balance: " + netMoney);
+        infoText.setText(
+                "Current Balance: " + netMoney +
+                        ", Need: " + netNeed + "/" + needBudget +
+                        ", Want: " + netWant + "/" + wantBudget +
+                        ", Saving: " + netSave + "/" + saveBudget);
         // if (netMoney < 0){
         // JOptionPane.showMessageDialog(null,
         // "WARNING: Negative Balance",

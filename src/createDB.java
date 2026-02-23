@@ -38,11 +38,11 @@ public class createDB {
     private static final String userName = "root";
     private static String password = "";
 
-    public static void setPassword(String psw){
+    public static void setPassword(String psw) {
         password = psw;
     }
 
-    public static String getPassword(){
+    public static String getPassword() {
         return password;
     }
 
@@ -75,6 +75,7 @@ public class createDB {
                     type ENUM('INCOME', 'EXPENSE') NOT NULL,
                     amount DECIMAL(10,2) NOT NULL,
                     date DATE NOT NULL,
+                    type ENUM('NEED', 'WANT', 'SAVING') NOT NULL,
                     description VARCHAR(255)
                 )
                 """;
@@ -94,9 +95,9 @@ public class createDB {
         }
     }
 
-    public static void insertTransaction(String type, float amount, String date, String note) {
+    public static void insertTransaction(String type, float amount, String date, String category, String note) {
 
-        String sql = "INSERT INTO transactions (type, amount, date, description) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO transactions (type, amount, date, category, description) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -104,7 +105,8 @@ public class createDB {
             pstmt.setString(1, type);
             pstmt.setDouble(2, amount);
             pstmt.setString(3, date);
-            pstmt.setString(4, note);
+            pstmt.setString(4, category);
+            pstmt.setString(5, note);
 
             pstmt.executeUpdate();
 
@@ -169,6 +171,28 @@ public class createDB {
         return sum;
     }
 
+    public static float retrieveNetMoney(String Category) {
+
+        String sql = "SELECT amount FROM transactions";
+        float sum = 0;
+        double amount;
+
+        try (Connection conn = getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet result = stmt.executeQuery(sql)) {
+
+            while (result.next()) {
+                amount = result.getDouble("amount");
+                sum += amount;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sum;
+    }
+
     public static void resetDB() {
 
         String sql = "TRUNCATE TABLE transactions";
@@ -188,7 +212,7 @@ public class createDB {
         }
     }
 
-    public static void deleteTransaction(int id){
+    public static void deleteTransaction(int id) {
         String sql = "DELETE FROM transactions WHERE id=" + id + ";";
 
         try (Connection conn = getConnection();
