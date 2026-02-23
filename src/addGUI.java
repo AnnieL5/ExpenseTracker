@@ -108,10 +108,19 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
                 type = "INCOME";
             }
 
-            String type2 = cb.getSelectedItem().toString();
+            String cat = cb.getSelectedItem().toString();
 
-            topGUI.updateInfoText(amount);
-            createDB.insertTransaction(type, amount, date, type2, note);
+            if (type.equals(NEED)) {
+                cat = "NEED";
+            } else if (type.equals(WANT)) {
+                cat = "WANT";
+            } else if (type.equals(SAVING)) {
+                cat = "SAVING";
+            }
+
+            createDB.insertTransaction(type, amount, date, cat, note);
+            topGUI.initNetMoney();
+            // topGUI.updateInfoText(amount);
 
             centerRightGUI.updateHistory();
 

@@ -75,7 +75,7 @@ public class createDB {
                     type ENUM('INCOME', 'EXPENSE') NOT NULL,
                     amount DECIMAL(10,2) NOT NULL,
                     date DATE NOT NULL,
-                    type ENUM('NEED', 'WANT', 'SAVING') NOT NULL,
+                    category ENUM('NEED', 'WANT', 'SAVING') NOT NULL,
                     description VARCHAR(255)
                 )
                 """;
@@ -134,10 +134,11 @@ public class createDB {
                 String type = result.getString("type");
                 double amount = result.getDouble("amount");
                 Date date = result.getDate("date");
+                String category = result.getString("category");
                 String desc = result.getString("description");
 
                 output += "ID: " + id + " | Type: " + type + " | Amount: " + amount + " | Date: " + date
-                        + " | Description: " + desc
+                        +"| Category: " + category + " | Description: " + desc
                         + "\n\n";
                 // System.out.println(id + " | " + amount + " | " + date + " | " + desc);
             }
@@ -171,9 +172,9 @@ public class createDB {
         return sum;
     }
 
-    public static float retrieveNetMoney(String Category) {
+    public static float retrieveNetMoney(String category) {
 
-        String sql = "SELECT amount FROM transactions";
+        String sql = "SELECT amount FROM transactions WHERE category="+category+";";
         float sum = 0;
         double amount;
 

@@ -11,7 +11,7 @@ public class topGUI extends JPanel implements ActionListener {
     static int wantBudget;
     static int saveBudget;
 
-    private static float netMoney;
+    public static float netMoney;
     private static float netNeed;
     private static float netWant;
     private static float netSave;
@@ -33,7 +33,7 @@ public class topGUI extends JPanel implements ActionListener {
 
     }
 
-    public void initNetMoney() {
+    public static void initNetMoney() {
         netMoney = createDB.retrieveNetMoney();
         infoText.setText(
                 "Current Balance: " + netMoney +

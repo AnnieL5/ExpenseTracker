@@ -115,6 +115,10 @@ public class budgetGUI extends JFrame implements ActionListener {
             topGUI.needBudget = Math.round(budget * needP / 100);
             topGUI.wantBudget = Math.round(budget * wantP / 100);
             topGUI.saveBudget = Math.round(budget * saveP / 100);
+
+            topGUI.netMoney = budget;
+            topGUI.initNetMoney();
+            this.setVisible(false);
         }
     }
 
