@@ -75,7 +75,7 @@ public class createDB {
                     type ENUM('INCOME', 'EXPENSE') NOT NULL,
                     amount DECIMAL(10,2) NOT NULL,
                     date DATE NOT NULL,
-                    category ENUM('NEED', 'WANT', 'SAVING') NOT NULL,
+                    category ENUM('NEED', 'WANT', 'SAVING','BUDGET') NOT NULL,
                     description VARCHAR(255)
                 )
                 """;
@@ -172,10 +172,31 @@ public class createDB {
         return sum;
     }
 
-    public static float retrieveNetMoney(String category) {
+    public static float retrieveNetMoney(String type) {
+        float total = 0;
 
-        String sql = "SELECT amount FROM transactions WHERE category="+category+";";
-        float sum = 0;
+        try {
+            String query = "SELECT SUM(amount) FROM transactions WHERE category = ?";
+            Connection conn = getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, type);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getFloat(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+    public static int retrieveNetBudget() {
+
+        String sql = "SELECT amount FROM transactions WHERE category='BUDGET';";
+        int sum = 0;
         double amount;
 
         try (Connection conn = getConnection();

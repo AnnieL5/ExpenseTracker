@@ -21,6 +21,11 @@ public class budgetGUI extends JFrame implements ActionListener {
 
     private JButton submitButton;
 
+    static int needP;
+    static int wantP;
+    static int saveP;
+
+
     public budgetGUI() {
         this.setLayout(new java.awt.FlowLayout());
 
@@ -106,9 +111,9 @@ public class budgetGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == saveTF) {
             textFieldAction(saveSlider, saveTF);
         } else if (e.getSource() == submitButton) {
-            int needP = Integer.parseInt(needTF.getText());
-            int wantP = Integer.parseInt(wantTF.getText());
-            int saveP = Integer.parseInt(saveTF.getText());
+            needP = Integer.parseInt(needTF.getText());
+            wantP = Integer.parseInt(wantTF.getText());
+            saveP = Integer.parseInt(saveTF.getText());
 
             int budget = Math.round(Float.parseFloat(budgetTF.getText()));
 
@@ -116,8 +121,10 @@ public class budgetGUI extends JFrame implements ActionListener {
             topGUI.wantBudget = Math.round(budget * wantP / 100);
             topGUI.saveBudget = Math.round(budget * saveP / 100);
 
-            topGUI.netMoney = budget;
+            createDB.insertTransaction("INCOME", budget, "2026-02-25", "BUDGET", "Initial Budget");
+            Main.frame.setVisible(true);
             topGUI.initNetMoney();
+            centerRightGUI.updateHistory();
             this.setVisible(false);
         }
     }

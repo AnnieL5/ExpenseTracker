@@ -51,7 +51,7 @@ public class Main {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.setVisible(true);
+        frame.setVisible(false);
 
         // 400 width and 500 height
         frame.setSize(700, 600);

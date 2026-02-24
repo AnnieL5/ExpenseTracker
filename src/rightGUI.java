@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class rightGUI extends JPanel implements ActionListener {
+    JButton addBudgetbutton;
     JButton resetDBbutton;
     JButton deleteDBbutton;
 
@@ -13,6 +14,10 @@ public class rightGUI extends JPanel implements ActionListener {
         setLayout(new GridLayout(2,1));
         deletegui = new deleteGUI();
 
+        addBudgetbutton = new JButton("Add Budget");
+        addBudgetbutton.addActionListener(this);
+        this.add(addBudgetbutton);
+        
         resetDBbutton = new JButton("Reset Database");
         resetDBbutton.addActionListener(this);
         this.add(resetDBbutton);
@@ -41,6 +46,8 @@ public class rightGUI extends JPanel implements ActionListener {
             }
         } else if (e.getSource() == deleteDBbutton){
             deletegui.setVisible(true);
+        } else if (e.getSource() == addBudgetbutton){
+            Main.budgetgui.setVisible(true);
         }
     }
 }

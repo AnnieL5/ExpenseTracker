@@ -12,6 +12,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
     final static String NEED = "  Need                          ";
     final static String WANT = "  Want                          ";
     final static String SAVING = "  Saving                          ";
+    final static String OTHER = "  Income - Budget for all                  ";
 
     JPanel cards;
     JPanel card1;
@@ -47,7 +48,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
         card1.add(dateField);
 
         card1.add(new JLabel("   Type:     "));
-        String typeCBItems[] = { NEED, WANT, SAVING };
+        String typeCBItems[] = { NEED, WANT, SAVING, OTHER };
         typecb = new JComboBox(typeCBItems);
         typecb.setEditable(false);
         typecb.addItemListener(this);
@@ -108,13 +109,13 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
                 type = "INCOME";
             }
 
-            String cat = cb.getSelectedItem().toString();
+            String cat = typecb.getSelectedItem().toString();
 
-            if (type.equals(NEED)) {
+            if (cat.equals(NEED)) {
                 cat = "NEED";
-            } else if (type.equals(WANT)) {
+            } else if (cat.equals(WANT)) {
                 cat = "WANT";
-            } else if (type.equals(SAVING)) {
+            } else if (cat.equals(SAVING)) {
                 cat = "SAVING";
             }
 
