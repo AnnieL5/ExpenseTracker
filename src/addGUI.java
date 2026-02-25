@@ -27,56 +27,95 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
     JButton submitButton;
 
     public addGUI() {
-        comboBoxPane = new JPanel();
+
+        Color lightGreen = new Color(204, 255, 204);
+        Font largeFont = new Font("SansSerif", Font.PLAIN, 15);
+        Font labelFont = new Font("SansSerif", Font.BOLD, 15);
+
+        this.setLayout(new BorderLayout(15, 15));
+        this.getContentPane().setBackground(lightGreen);
+
+        comboBoxPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 15));
+        comboBoxPane.setBackground(lightGreen);
+
         String comboBoxItems[] = { EXPENSE, INCOME };
         cb = new JComboBox(comboBoxItems);
+        cb.setFont(largeFont);
+        cb.setPreferredSize(new Dimension(200, 35));
         cb.setEditable(false);
         cb.addItemListener(this);
         comboBoxPane.add(cb);
 
         // Create cards
-        card1 = new JPanel(); // expense new GridLayout(4, 2)
+        card1 = new JPanel(new GridLayout(5, 2, 15, 15));
+        card1.setBackground(lightGreen);
+        card1.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
         amountField = new JTextField(20);
-        dateField = new JTextField("2026-02-25", 18);
-        noteField = new JTextField(18);
+        amountField.setFont(largeFont);
 
-        card1.add(new JLabel("Amount"));
+        dateField = new JTextField("2026-02-25", 20);
+        dateField.setFont(largeFont);
 
-        card1.add(amountField);
+        noteField = new JTextField(20);
+        noteField.setFont(largeFont);
 
-        card1.add(new JLabel("Date(YYYY-MM-DD):"));
-        card1.add(dateField);
+        JLabel amountLabel = new JLabel("Amount:");
+        amountLabel.setFont(labelFont);
 
-        card1.add(new JLabel("   Type:     "));
+        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        dateLabel.setFont(labelFont);
+
+        JLabel typeLabel = new JLabel("Type:");
+        typeLabel.setFont(labelFont);
+
+        JLabel noteLabel = new JLabel("Note:");
+        noteLabel.setFont(labelFont);
+
         String typeCBItems[] = { NEED, WANT, SAVING, OTHER };
         typecb = new JComboBox(typeCBItems);
+        typecb.setFont(largeFont);
+        typecb.setPreferredSize(new Dimension(200, 35));
         typecb.setEditable(false);
         typecb.addItemListener(this);
-        card1.add(typecb);
 
-        card1.add(new JLabel("Note:"));
-        card1.add(noteField);
-
-        submitButton = new JButton("Add");
+        submitButton = new JButton("Add Transaction");
+        submitButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+        submitButton.setPreferredSize(new Dimension(200, 45));
         submitButton.addActionListener(this);
-        card1.add(submitButton);
 
         // card2 = new JPanel();
         // card2.add(new JTextField("Amount: ", 20));
 
         // Create the panel that contains the "cards".
+        card1.add(amountLabel);
+        card1.add(amountField);
+
+        card1.add(dateLabel);
+        card1.add(dateField);
+
+        card1.add(typeLabel);
+        card1.add(typecb);
+
+        card1.add(noteLabel);
+        card1.add(noteField);
+
+        card1.add(new JLabel()); // empty cell for spacing
+        card1.add(submitButton);
+
+        // ===== Cards Panel =====
         cards = new JPanel(new CardLayout());
-        cards.add(comboBoxPane);
-        cards.add(card1);
+        cards.setBackground(lightGreen);
+        cards.add(card1, EXPENSE);
+
+        // Add to frame
+        this.add(comboBoxPane, BorderLayout.NORTH);
+        this.add(cards, BorderLayout.CENTER);
         // cards.add(card2, INCOME);
 
-        this.setSize(250, 300);
-
-        this.add(comboBoxPane, BorderLayout.PAGE_START);
-        this.add(cards, BorderLayout.CENTER);
-
+        this.setSize(450, 400);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
         this.setVisible(false);
     }
 

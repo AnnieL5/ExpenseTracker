@@ -18,11 +18,19 @@ public class topGUI extends JPanel implements ActionListener {
     private static float netSave;
 
     public topGUI() {
-        setBounds(0, 0, 400, 400);
-        setLayout(new FlowLayout());
+        // setBounds(0, 0, 400, 400);
+        setOpaque(true);
+        setBackground(new Color(204, 255, 204));
+        setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+
+        Font bigFont = new Font("SansSerif", Font.BOLD, 15);
 
         addButton = new JButton("Add transaction");
+        addButton.setFont(bigFont);
+        addButton.setFocusPainted(false);
+
         infoText = new JLabel();
+        infoText.setFont(new Font("SansSerif", Font.BOLD, 15));
         initNetMoney();
 
         addgui = new addGUI();

@@ -3,13 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-public class deleteGUI extends JFrame implements ActionListener{
+public class deleteGUI extends JFrame implements ActionListener {
     JTextField componentID;
     JButton deleteButton;
 
-    public deleteGUI(){
+    public deleteGUI() {
         this.setLayout(new java.awt.FlowLayout());
         componentID = new JTextField(20);
 

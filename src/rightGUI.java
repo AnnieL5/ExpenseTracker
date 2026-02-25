@@ -11,20 +11,29 @@ public class rightGUI extends JPanel implements ActionListener {
     deleteGUI deletegui;
 
     public rightGUI() {
-        setLayout(new GridLayout(3, 1));
+        setOpaque(true);
+        setBackground(new Color(204, 255, 204));
+        setLayout(new GridLayout(3, 1, 15, 15));
+
+        Font buttonFont = new Font("SansSerif", Font.BOLD, 15);
+
         deletegui = new deleteGUI();
 
         addBudgetbutton = new JButton("Add Budget");
+        addBudgetbutton.setFont(buttonFont);
         addBudgetbutton.addActionListener(this);
         this.add(addBudgetbutton);
 
+        deleteDBbutton = new JButton("Delete transaction");
+        deleteDBbutton.setFont(buttonFont);
+        deleteDBbutton.addActionListener(this);
+        this.add(deleteDBbutton);
+
         resetDBbutton = new JButton("Reset Database");
+        resetDBbutton.setFont(buttonFont);
         resetDBbutton.addActionListener(this);
         this.add(resetDBbutton);
 
-        deleteDBbutton = new JButton("Delete transaction");
-        deleteDBbutton.addActionListener(this);
-        this.add(deleteDBbutton);
     }
 
     @Override

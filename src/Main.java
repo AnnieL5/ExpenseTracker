@@ -23,6 +23,12 @@ public class Main {
         // // Handle exceptions (e.g., if the desired L&F is not available)
         // e.printStackTrace();
         // }
+        UIManager.put("Button.background", new Color(76, 175, 80));
+        UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("Button.focus", new Color(76, 175, 80));
+        UIManager.put("Button.select", new Color(56, 142, 60));
+
+        UIManager.put("Button.font", new Font("SansSerif", Font.BOLD, 15));
 
         introgui = new introGUI();
         String pasw = createDB.getPassword();
@@ -35,10 +41,13 @@ public class Main {
 
         // Creating instance of JFrame
         frame = new JFrame();
-        frame.setBackground(new Color(255, 100, 50));
+        frame.setTitle("Budget Manager");
+        Color lightGreen = new Color(204, 255, 204);
+        frame.getContentPane().setBackground(lightGreen);
 
-        // using no layout managers
-        frame.setLayout(new BorderLayout());
+        frame.setLayout(new BorderLayout(15, 15)); // spacing between areas
+        frame.setSize(1000, 700);
+        frame.setLocationRelativeTo(null); // center screen
 
         topgui = new topGUI();
         centergui = new centerGUI();
