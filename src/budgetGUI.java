@@ -25,7 +25,6 @@ public class budgetGUI extends JFrame implements ActionListener {
     static int wantP;
     static int saveP;
 
-
     public budgetGUI() {
         this.setLayout(new java.awt.FlowLayout());
 
@@ -111,21 +110,29 @@ public class budgetGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == saveTF) {
             textFieldAction(saveSlider, saveTF);
         } else if (e.getSource() == submitButton) {
+
             needP = Integer.parseInt(needTF.getText());
             wantP = Integer.parseInt(wantTF.getText());
             saveP = Integer.parseInt(saveTF.getText());
 
-            int budget = Math.round(Float.parseFloat(budgetTF.getText()));
+            if (saveP + needP + wantP != 100) {
+                JOptionPane.showMessageDialog(null,
+                        "Error: Percentage does not add up to 100",
+                        "System Message",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int budget = Math.round(Float.parseFloat(budgetTF.getText()));
 
-            topGUI.needBudget = Math.round(budget * needP / 100);
-            topGUI.wantBudget = Math.round(budget * wantP / 100);
-            topGUI.saveBudget = Math.round(budget * saveP / 100);
+                topGUI.needBudget = Math.round(budget * needP / 100);
+                topGUI.wantBudget = Math.round(budget * wantP / 100);
+                topGUI.saveBudget = Math.round(budget * saveP / 100);
 
-            createDB.insertTransaction("INCOME", budget, "2026-02-25", "BUDGET", "Initial Budget");
-            Main.frame.setVisible(true);
-            topGUI.initNetMoney();
-            centerRightGUI.updateHistory();
-            this.setVisible(false);
+                createDB.insertTransaction("INCOME", budget, "2026-02-25", "BUDGET", "Initial Budget");
+                Main.frame.setVisible(true);
+                topGUI.initNetMoney();
+                centerRightGUI.updateHistory();
+                this.setVisible(false);
+            }
         }
     }
 

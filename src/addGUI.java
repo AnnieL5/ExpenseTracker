@@ -9,9 +9,9 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
     final static String EXPENSE = "Add Expense";
     final static String INCOME = "Add income";
 
-    final static String NEED = "  Need                          ";
-    final static String WANT = "  Want                          ";
-    final static String SAVING = "  Saving                          ";
+    final static String NEED = "  Need                ";
+    final static String WANT = "  Want                      ";
+    final static String SAVING = "  Saving                 ";
     final static String OTHER = "  Income - Budget for all                  ";
 
     JPanel cards;
@@ -37,7 +37,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
         // Create cards
         card1 = new JPanel(); // expense new GridLayout(4, 2)
         amountField = new JTextField(20);
-        dateField = new JTextField(13);
+        dateField = new JTextField("2026-02-25", 18);
         noteField = new JTextField(18);
 
         card1.add(new JLabel("Amount"));
@@ -70,7 +70,7 @@ public class addGUI extends JFrame implements ItemListener, ActionListener {
         cards.add(card1);
         // cards.add(card2, INCOME);
 
-        this.setSize(250, 220);
+        this.setSize(250, 300);
 
         this.add(comboBoxPane, BorderLayout.PAGE_START);
         this.add(cards, BorderLayout.CENTER);

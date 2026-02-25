@@ -85,10 +85,10 @@ public class createDB {
 
             stmt.executeUpdate(sql);
 
-            JOptionPane.showMessageDialog(null,
-                    "Table created successfully",
-                    "System Message",
-                    JOptionPane.INFORMATION_MESSAGE);
+            // JOptionPane.showMessageDialog(null,
+            // "Table created successfully",
+            // "System Message",
+            // JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,7 +138,7 @@ public class createDB {
                 String desc = result.getString("description");
 
                 output += "ID: " + id + " | Type: " + type + " | Amount: " + amount + " | Date: " + date
-                        +"| Category: " + category + " | Description: " + desc
+                        + "| Category: " + category + " | Description: " + desc
                         + "\n\n";
                 // System.out.println(id + " | " + amount + " | " + date + " | " + desc);
             }
@@ -193,6 +193,7 @@ public class createDB {
 
         return total;
     }
+
     public static int retrieveNetBudget() {
 
         String sql = "SELECT amount FROM transactions WHERE category='BUDGET';";

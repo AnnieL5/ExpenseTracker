@@ -11,7 +11,7 @@ public class topGUI extends JPanel implements ActionListener {
     static int wantBudget;
     static int saveBudget;
 
-    public static float netMoney=0;
+    public static float netMoney = 0;
     public static int netBuget;
     private static float netNeed;
     private static float netWant;
@@ -38,13 +38,23 @@ public class topGUI extends JPanel implements ActionListener {
         netMoney = createDB.retrieveNetMoney();
         netBuget = createDB.retrieveNetBudget();
 
-        needBudget = budgetGUI.needP * netBuget /100;
-        wantBudget = budgetGUI.wantP * netBuget /100;
-        saveBudget = budgetGUI.saveP * netBuget /100;
+        needBudget = budgetGUI.needP * netBuget / 100;
+        wantBudget = budgetGUI.wantP * netBuget / 100;
+        saveBudget = budgetGUI.saveP * netBuget / 100;
 
         netNeed = -createDB.retrieveNetMoney("NEED");
         netWant = -createDB.retrieveNetMoney("WANT");
         netSave = -createDB.retrieveNetMoney("SAVING");
+
+        if (createDB.retrieveNetMoney("NEED") == 0) {
+            netNeed = 0;
+        }
+        if (createDB.retrieveNetMoney("WANT") == 0) {
+            netWant = 0;
+        }
+        if (createDB.retrieveNetMoney("SAVING") == 0) {
+            netSave = 0;
+        }
 
         infoText.setText(
                 "Current Balance: " + netMoney +
