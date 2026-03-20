@@ -1,6 +1,8 @@
-## Getting Started
+## Stay on Budget with Expense Tracker
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Ever concerned with staying on budget when you go to post-secondary or getting a new job?
+
+Well the good news is, AAA Expense tracker is here to help!
 
 ## Folder Structure
 
