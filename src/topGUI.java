@@ -18,7 +18,7 @@ public class topGUI extends JPanel implements ActionListener {
     private static float netSave;
 
     public topGUI() {
-        // setBounds(0, 0, 400, 400);
+        setBounds(0, 0, 400, 400);
         setOpaque(true);
         setBackground(new Color(204, 255, 204));
         setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
@@ -30,12 +30,13 @@ public class topGUI extends JPanel implements ActionListener {
         addButton.setFocusPainted(false);
 
         infoText = new JLabel();
-        infoText.setFont(new Font("SansSerif", Font.BOLD, 15));
+        infoText.setFont(new Font("SansSerif", Font.BOLD, 20));
         initNetMoney();
 
         addgui = new addGUI();
 
         addButton.addActionListener(this);
+        this.setOpaque(false);
 
         this.add(addButton);
         this.add(infoText);

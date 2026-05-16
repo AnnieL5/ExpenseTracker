@@ -14,15 +14,7 @@ public class Main {
     public static JFrame frame;
 
     public static void main(String[] args) throws Exception {
-        // try {
-        // // Set the Look and Feel to the system's native L&F
-        // UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-        // // MetalLookAndFeel.setCurrentTheme(new OceanTheme());
-        // } catch (ClassNotFoundException | InstantiationException |
-        // IllegalAccessException | UnsupportedLookAndFeelException e) {
-        // // Handle exceptions (e.g., if the desired L&F is not available)
-        // e.printStackTrace();
-        // }
+
         UIManager.put("Button.background", new Color(76, 175, 80));
         UIManager.put("Button.foreground", Color.WHITE);
         UIManager.put("Button.focus", new Color(76, 175, 80));
@@ -42,12 +34,12 @@ public class Main {
         // Creating instance of JFrame
         frame = new JFrame();
         frame.setTitle("Budget Manager");
-        Color lightGreen = new Color(204, 255, 204);
-        frame.getContentPane().setBackground(lightGreen);
 
-        frame.setLayout(new BorderLayout(15, 15)); // spacing between areas
-        frame.setSize(1000, 700);
-        frame.setLocationRelativeTo(null); // center screen
+        ImageIcon background = new ImageIcon("src/img/greenbg2.jpg");
+        JLabel imglabel = new JLabel(background);
+        imglabel.setLayout(new BorderLayout(15, 15));
+
+        frame.setContentPane(imglabel);
 
         topgui = new topGUI();
         centergui = new centerGUI();
@@ -58,12 +50,14 @@ public class Main {
         frame.add(centergui, BorderLayout.CENTER);
         frame.add(rightgui, BorderLayout.EAST);
 
+        frame.setSize(1000, 700);
+        frame.setLocationRelativeTo(null); // center screen
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setVisible(false);
 
         // 400 width and 500 height
-        frame.setSize(700, 600);
+        // frame.setSize(700, 600);
 
         // createdb = new createDB();
         createDB.createDatabase();

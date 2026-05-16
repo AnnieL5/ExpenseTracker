@@ -2,54 +2,28 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class createDB {
-    // public static void main(String[] args) throws Exception {
-    // try {
-    // String url = "jdbc:mysql://localhost:3306/";
-    // // String url = "jdbc:mysql://localhost:3306/expenseTracker";
-    // String databaseName = "localhost";
-    // String userName = "root";
-    // String password = "SQL.mtbt0511";
 
-    // Connection connection = DriverManager.getConnection(url, userName, password);
-
-    // String sql = "CREATE DATABASE " + databaseName;
-
-    // Statement statement = connection.createStatement(); // connect to database
-    // statement.executeUpdate(sql);
-
-    // /*
-    // results = statement.executeUpdate(sql);
-    // while(result.next() != false){
-    // output = result.getString();
-    // }
-
-    // */
-    // statement.close();
-    // JOptionPane.showMessageDialog(null, databaseName + " Database has been
-    // created successfully",
-    // "System Message", JOptionPane.INFORMATION_MESSAGE);
-
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
+    // Pre-define variables
     private static final String url = "jdbc:mysql://localhost:3306/expenseTracker";
     private static final String userName = "root";
     private static String password = "";
 
+    // Set password
     public static void setPassword(String psw) {
         password = psw;
     }
 
+    // Get password
     public static String getPassword() {
         return password;
     }
 
+    // Connect to SQL
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, userName, password);
     }
 
+    // Create Database
     public static void createDatabase() {
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/", userName, password);
@@ -84,11 +58,6 @@ public class createDB {
                 Statement stmt = conn.createStatement()) {
 
             stmt.executeUpdate(sql);
-
-            // JOptionPane.showMessageDialog(null,
-            // "Table created successfully",
-            // "System Message",
-            // JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +109,7 @@ public class createDB {
                 output += "ID: " + id + " | Type: " + type + " | Amount: " + amount + " | Date: " + date
                         + "| Category: " + category + " | Description: " + desc
                         + "\n\n";
-                // System.out.println(id + " | " + amount + " | " + date + " | " + desc);
+
             }
 
         } catch (Exception e) {
@@ -252,10 +221,5 @@ public class createDB {
             e.printStackTrace();
         }
     }
-
-    /*
-     * Delete: TRUNCATE TABLE table_name;
-     * DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
-     */
 
 }

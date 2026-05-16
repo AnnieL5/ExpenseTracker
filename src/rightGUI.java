@@ -11,11 +11,11 @@ public class rightGUI extends JPanel implements ActionListener {
     deleteGUI deletegui;
 
     public rightGUI() {
-        setOpaque(true);
+        // setOpaque(true);
         setBackground(new Color(204, 255, 204));
         setLayout(new GridLayout(3, 1, 15, 15));
 
-        Font buttonFont = new Font("SansSerif", Font.BOLD, 15);
+        Font buttonFont = new Font("SansSerif", Font.BOLD, 18);
 
         deletegui = new deleteGUI();
 
@@ -33,6 +33,8 @@ public class rightGUI extends JPanel implements ActionListener {
         resetDBbutton.setFont(buttonFont);
         resetDBbutton.addActionListener(this);
         this.add(resetDBbutton);
+
+        this.setOpaque(false);
 
     }
 

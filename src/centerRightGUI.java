@@ -26,6 +26,8 @@ public class centerRightGUI extends JPanel {
         add(historyLabel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
+        this.setOpaque(false);
+
         updateHistory();
     }
 

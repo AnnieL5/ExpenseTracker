@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class budgetGUI extends JFrame implements ActionListener {
     // public class budgetGUI extends JFrame {
+
     private JLabel heading;
     private JLabel description;
 
@@ -26,78 +27,61 @@ public class budgetGUI extends JFrame implements ActionListener {
     static int saveP;
 
     public budgetGUI() {
-        this.setLayout(new java.awt.FlowLayout());
+
+        ImageIcon background = new ImageIcon("src/img/whitebg2.jpg");
+        JLabel imglabel = new JLabel(background);
+        this.setContentPane(imglabel);
 
         heading = new JLabel("Enter your budget");
         heading.setFont(new Font("Arial", Font.BOLD, 16));
-        this.add(heading);
+        imglabel.add(heading);
 
         description = new JLabel(
                 "<html>Please enter your budget for the month.<br> The amount entered will be split into sections (needs, <br> wants, save) based on your preference.</html>");
         description.setFont(new Font("Arial", Font.PLAIN, 18));
-        this.add(description);
-
-        // this.add(new JLabel("<html> <br> </html>"));
+        imglabel.add(description);
 
         this.add(new JLabel("Budget ($): "));
         budgetTF = new JTextField(30);
         budgetTF.addActionListener(this);
-        this.add(budgetTF);
-
-        // this.add(new JLabel("\n"));
+        imglabel.add(budgetTF);
 
         // Need
         this.add(new JLabel("Need (%): "));
-        needSlider = new JSlider(0, 100);
+        needSlider = new JSlider(0, 100, 50);
         needTF = new JTextField(String.valueOf(needSlider.getValue()), 15);
         setupSlider(needSlider, needTF);
         System.out.println("Here");
 
-        this.add(needSlider);
-        this.add(needTF);
+        imglabel.add(needSlider);
+        imglabel.add(needTF);
 
         // Want
-        this.add(new JLabel("Want (%): "));
-        wantSlider = new JSlider(0, 100);
+        imglabel.add(new JLabel("Want (%): "));
+        wantSlider = new JSlider(0, 100, 30);
         wantTF = new JTextField(String.valueOf(wantSlider.getValue()), 15);
         setupSlider(wantSlider, wantTF);
 
-        this.add(wantSlider);
-        this.add(wantTF);
+        imglabel.add(wantSlider);
+        imglabel.add(wantTF);
 
         // Savings
-        this.add(new JLabel("Saving (%): "));
-        saveSlider = new JSlider(0, 100);
+        imglabel.add(new JLabel("Saving (%): "));
+        saveSlider = new JSlider(0, 100, 20);
         saveTF = new JTextField(String.valueOf(saveSlider.getValue()), 15);
         setupSlider(saveSlider, saveTF);
 
-        this.add(saveSlider);
-        this.add(saveTF);
-
-        // this.add(new JLabel("\n"));
+        imglabel.add(saveSlider);
+        imglabel.add(saveTF);
 
         submitButton = new JButton("Done");
         submitButton.addActionListener(this);
-        this.add(submitButton);
+        imglabel.add(submitButton);
 
+        this.setLayout(new java.awt.FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setSize(450, 450);
-
-        // needTF.addActionListener(e -> {
-        // try {
-        // int value = Integer.parseInt(needTF.getText());
-        // if (value >= needSlider.getMinimum() && value <= needSlider.getMaximum()) {
-        // needSlider.setValue(value);
-        // } else {
-        // // Optional: Reset if out of range
-        // needTF.setText(String.valueOf(needSlider.getValue()));
-        // }
-        // } catch (NumberFormatException ex) {
-        // // Reset if invalid input
-        // needTF.setText(String.valueOf(needSlider.getValue()));
-        // }
-        // });
 
     }
 

@@ -11,6 +11,11 @@ public class introGUI extends JFrame implements ActionListener {
     JPasswordField password;
 
     public introGUI() {
+
+        ImageIcon background = new ImageIcon("src/img/whitebg2.jpg");
+        JLabel imglabel = new JLabel(background);
+        this.setContentPane(imglabel);
+
         this.setLayout(new java.awt.FlowLayout());
         introLabel1 = new JLabel("Welcome to...");
         introLabel1.setFont(new Font("Arial", Font.BOLD, 16));
@@ -42,9 +47,9 @@ public class introGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // createDB.setPassword("SQL.mtbt0511");
-        // String str = String.valueOf(password.getPassword());
-        String str = "SQL.mtbt0511";
+        // createDB.setPassword("PASSWORD");
+        String str = String.valueOf(password.getPassword());
+        // String str = "PASSWORD";
         // System.out.println(str);
         createDB.setPassword(str);
         setVisible(false);
